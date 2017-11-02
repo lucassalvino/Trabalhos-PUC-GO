@@ -1,0 +1,10 @@
+8
+a_guerra_dos_tronos-george_rr_martin.txt
+as_cronicas_de_artur-o_rei_do_inverno-bernard_cornwell.txt
+dracula-bram_stoker.txt
+o_guia_do_mochileiro_das_galaxias-douglas_adams.txt
+o_hobbit-jrr_tolkien.txt
+tempo_perdido-legiao_urbana.txt
+temporal_de_amor-leonardo.txt
+tocando_em_frente-almir_sater.txt
+

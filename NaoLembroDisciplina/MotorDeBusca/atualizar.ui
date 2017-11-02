@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Atualizar</class>
+ <widget class="QWidget" name="Atualizar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>505</width>
+    <height>74</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>505</width>
+    <height>74</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>505</width>
+    <height>74</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Atualizar</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/new/prefix1/Dados/refresh.png</normaloff>:/new/prefix1/Dados/refresh.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">Qlabel:hover{
+	background:transparent;
+	background-image: url(:/new/prefix1/Dados/wallpaper.jpg);
+	color: rgb(255,0,0);
+}
+QPushButton:hover{
+	color:red;
+	background:transparent;
+}
+QLineEdit{
+	background:transparent;
+}
+QLineEdit:Hover{
+	background:transparent;
+	background-image: url(:/new/prefix1/Dados/wallpaper.jpg);
+	color: rgb(255,0,0);
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Digite o caminho do Arquivo com os endereços:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="lineEdit"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Abrir</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

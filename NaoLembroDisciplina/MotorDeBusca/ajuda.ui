@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Ajuda</class>
+ <widget class="QWidget" name="Ajuda">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>577</width>
+    <height>474</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Ajuda</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="dados.qrc">
+    <normaloff>:/new/prefix1/Dados/Help.png</normaloff>:/new/prefix1/Dados/Help.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton:hover{
+	background:transparent;
+	color: blue;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QTextBrowser" name="textBrowser"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Trabalho de Estrutura de Dados II, Lucas Salvino de Deus</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="dados.qrc"/>
+ </resources>
+ <connections/>
+</ui>

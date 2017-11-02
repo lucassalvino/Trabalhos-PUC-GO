@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>JanelaPrincipal</class>
+ <widget class="QMainWindow" name="JanelaPrincipal">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>644</width>
+    <height>504</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Motor De Busca</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="dados.qrc">
+    <normaloff>:/new/prefix1/Dados/icone_busca.png</normaloff>:/new/prefix1/Dados/icone_busca.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-image: url(:/new/prefix1/Dados/wallPaper.jpg);
+}
+QTextBrowser{
+	background:transparent;
+	color:black;
+}
+QPushButton{
+	background:transparent;
+	color: rgb(0,0,0);
+}
+QPushButton:hover{
+	background:transparent;
+	color: blue;
+}
+QLineEdit{
+	background:transparent;
+}
+QLineEdit:Hover{
+	background:transparent;
+	background-image: url(:/new/prefix1/Dados/wallpaper.jpg);
+	color: rgb(255,0,0);
+}
+QStatusBar{
+	background:transparent;
+}
+QMenuBar{
+	background:transparent;
+}
+QMenu{
+	background:none;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="text">
+         <string>Ao menos uma</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>Todas</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Buscar</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textBrowser"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>644</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_Op_es">
+    <property name="title">
+     <string>&amp;Opções</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="action_Atualizar"/>
+    <addaction name="separator"/>
+    <addaction name="action_Sair"/>
+   </widget>
+   <widget class="QMenu" name="menu_a">
+    <property name="title">
+     <string>&amp;Sobre</string>
+    </property>
+    <addaction name="action_Ajuda"/>
+   </widget>
+   <addaction name="menu_Op_es"/>
+   <addaction name="menu_a"/>
+  </widget>
+  <action name="action_Atualizar">
+   <property name="text">
+    <string>&amp;Atualizar</string>
+   </property>
+  </action>
+  <action name="action_Sair">
+   <property name="text">
+    <string>&amp;Sair</string>
+   </property>
+  </action>
+  <action name="action_Ajuda">
+   <property name="text">
+    <string>&amp;Ajuda</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="dados.qrc"/>
+ </resources>
+ <connections/>
+</ui>
