@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!--CUMPRIMENTOS-->
+<category>
+    <pattern>OLA</pattern>
+        <template>
+            <random>
+                <li>Oi! Como vai você?</li>
+                <li>Oi!</li>
+                <li>Há quanto tempo</li>
+                <li><srai>OI</srai></li>
+            </random>
+        </template>
+</category>
+<category>
+    <pattern>OLÁ</pattern>
+        <template><srai>OLA</srai></template>
+</category>
+<category>
+    <pattern>OI</pattern>
+        <template>
+            <random>
+                <li>Oi!!!!</li>
+                <li>Ol! Posso ajudar?</li>
+                <li>Oi, qual informação deseja?</li>
+                <li>Oi, como posso ser útil?</li>
+            </random>
+    </template>
+</category>
+<category>
+    <pattern>TCHAU</pattern>
+    <template>
+        <random>
+            <li>Até a próxima!</li>
+            <li>Tchau, tchau!</li>
+            <li>Tchau!</li>
+            <li>Inté!</li>
+            <li>Vai pela sombra! :)</li>
+            <li>Aparece, tá?</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>NAO</pattern>
+    <template><srai>NAONEG</srai></template>
+</category>
+<category>
+    <pattern>QUEM É VOCÊ</pattern>
+    <template>Sou o Titor, Viajante do tempo, que veio ajudar esse período da história</template>
+</category>
+<category>
+    <pattern>NAO *</pattern>
+    <template><srai>NAONEG</srai></template>
+</category>
+<category>
+    <pattern>NÃO</pattern>
+    <template><srai>NAONEG</srai></template>
+</category>
+<category>
+    <pattern>NÃO *</pattern>
+    <template><srai>NAONEG</srai></template>
+</category>
+
+
+<!--COMO-->
+<category>
+    <pattern>COMO *</pattern>
+    <template><srai>LINK<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO SERA *</pattern>
+    <template><srai>LINK<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO VOCE *</pattern>
+    <template><srai>LINK<star/></srai></template>
+</category>
+
+<!--VOCE-->
+<category>
+    <pattern>VOCE *</pattern>
+    <template><srai>LINK<star/></srai></template>
+</category>
+
+<category>
+    <pattern>VOCE ACREDITA *</pattern>
+    <template><srai>LINK<star/></srai></template>
+</category>
+
+<!--DIVERSOS-->
+<category>
+    <pattern>POR QUE ALGUNS ACONTECIMENTOS NÃO ACONTECERAM</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>POR QUE ALGUNS ACONTECIMENTOS NÃO OCORRERAM</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>POR QUE ISSO NAO ACONTECEU</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>ISSO É MENTIRA</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>ISSO PARECE MENTIRA</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>PARECE MENTIRA</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>ISSO NÃO ACONTECEU</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>ISSO NAO ACONTECEU</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+<category>
+    <pattern>MENTIRA</pattern>
+    <template><srai>DIZ NAO OCORRE<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO FICARÃO AS RELAÇÕES INTERPESSOAIS</pattern>
+    <template><srai>RELACOES INTERPESSOAIS<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO FICARÃO AS RELAÇÕES</pattern>
+    <template><srai>RELACOES INTERPESSOAIS<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO AS PESSOAS VÃO SE RELACIONAR</pattern>
+    <template><srai>RELACOES INTERPESSOAIS<star/></srai></template>
+</category>
+<category>
+    <pattern>AS PESSOAS VÃO SE RELACIONAR</pattern>
+    <template><srai>RELACOES INTERPESSOAIS<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO SERÃO AS PESSOAS</pattern>
+    <template><srai>RELACOES INTERPESSOAIS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÃO OS AMIGOS</pattern>
+    <template><srai>RELACOES INTERPESSOAIS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A HABITAÇÃO MORADIA CASA DO FUTURO</pattern>
+    <template><srai>COMO SAO HABITACOES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A MORADIA DO FUTURO</pattern>
+    <template><srai>COMO SAO HABITACOES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A HABITAÇÃO DO FUTURO</pattern>
+    <template><srai>COMO SAO HABITACOES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A CASA DO FUTURO</pattern>
+    <template><srai>COMO SAO HABITACOES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>ONDE VOCÊ MORA</pattern>
+    <template><srai>COMO SAO HABITACOES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ MODELO DE ECUCAÇÃO</pattern>
+    <template><srai>COMO SERA EDUCACAO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A EDUCAÇÃO</pattern>
+    <template><srai>COMO SERA EDUCACAO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A UNIVERSIDADE</pattern>
+    <template><srai>COMO SERA EDUCACAO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO AS PESSOAS IRÃO APRENDER</pattern>
+    <template><srai>COMO SERA EDUCACAO<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO VOU APRENDER</pattern>
+    <template><srai>COMO SERA EDUCACAO<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO TEREMOS AULA</pattern>
+    <template><srai>COMO SERA EDUCACAO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ POSSÍVEL RESOLVER PROCESSOS JUDICIAIS</pattern>
+    <template> Serão resolvidos via sistemas inteligêntes. <srai>PROCESSOS JUDICIAIS ELETRONICOS<star/></srai></template>
+</category>
+<category>
+    <pattern>COMO SERÁ A PROFISSÃO DE AFVOGADO</pattern>
+    <template><srai>PROCESSOS JUDICIAIS ELETRONICOS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>ACONTECE ALGUM EVENTO NUCLEAR</pattern>
+    <template>Sim, diversos eventos. Mas não posso contar muitos detalhes</template>
+</category>
+
+<category>
+    <pattern>COMO VOCÊ SOBREVIVEU AO EVENTO NUCLEAR</pattern>
+    <template><srai>COMO SOBRREVIVEU NUCLEAR<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO VOCÊ SOBREVIVEU</pattern>
+    <template><srai>COMO SOBRREVIVEU NUCLEAR<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO VOCÊ SOBREVIVEU A EVENTOS NUCLEAR</pattern>
+    <template><srai>COMO SOBRREVIVEU NUCLEAR<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO VOCÊ VIAJA NO TEMPO</pattern>
+    <template><srai>COMO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO É A VIAGEM TEMPORAL</pattern>
+    <template><srai>COMO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO IR PARA O FUTURO</pattern>
+    <template><srai>COMO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO VIAJAR PARA O FUTURO</pattern>
+    <template><srai>COMO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO VIAJAR PARA O PASSADO</pattern>
+    <template><srai>COMO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO IR PARA O FUTURO</pattern>
+    <template><srai>COMO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>CONTE NO MAIS SOBRE O FUTURO</pattern>
+    <template><srai>CONTAR FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>MAIS SOBRE O FUTURO</pattern>
+    <template><srai>CONTAR FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ O FUTURO</pattern>
+    <template><srai>CONTAR FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO É O FUTURO</pattern>
+    <template><srai>CONTAR FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>DÊ-ME PREVISÕES SOBRE FATOS QUE VÃO MUDAR A VIDA DAS PESSOAS</pattern>
+    <template><srai>PREVISOES FATOS PESSOAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A VIDA DAS PESSOAS</pattern>
+    <template><srai>PREVISOES FATOS PESSOAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ O COTIDIANO</pattern>
+    <template><srai>PREVISOES FATOS PESSOAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ O DIA-A-DIA</pattern>
+    <template><srai>PREVISOES FATOS PESSOAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A VIDA DAS PESSOAS</pattern>
+    <template><srai>PREVISOES FATOS PESSOAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>E OS PROBLEMAS ENFRENTADOS PELA AFRICA</pattern>
+    <template><srai>COMO AFRICA MUDOU<star/></srai></template>
+</category>
+
+<category>
+    <pattern>O QUE ACONTECEU NA AFRICA</pattern>
+    <template><srai>COMO AFRICA MUDOU<star/></srai></template>
+</category>
+
+<category>
+    <pattern>EXISTE RESTRIÇÃO PARA VIAGEM NO TEMPO</pattern>
+    <template><srai>RESTRICAO VIAGEM TEMPO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>TEREMOS FIM DAS DOENÇAS</pattern>
+    <template><srai>FIM DOENCAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>FIM DAS DOENÇAS</pattern>
+    <template><srai>FIM DOENCAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>CURA DE DOENÇAS</pattern>
+    <template><srai>FIM DOENCAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUAIS DOENÇAS SERÃO CURADAS</pattern>
+    <template><srai>FIM DOENCAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO SERÁ A SAÚDE NO FUTURO</pattern>
+    <template><srai>FIM DOENCAS<star/></srai></template>
+</category>
+
+<category>
+    <pattern>OS CARROS VOADORES VÃO EXISTIR</pattern>
+    <template><srai>CARROS VOADORES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>CARROS VOADORES</pattern>
+    <template><srai>CARROS VOADORES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>POR QUE MOTIVOS VOCÊ ESTA AQUI E AGORA</pattern>
+    <template><srai>POR QUE ESTA AQUI<star/></srai></template>
+</category>
+
+<category>
+    <pattern>POR QUE ESTA AQUI E AGORA</pattern>
+    <template><srai>POR QUE ESTA AQUI<star/></srai></template>
+</category>
+
+<category>
+    <pattern>POR QUE ESTA AQUI</pattern>
+    <template><srai>POR QUE ESTA AQUI<star/></srai></template>
+</category>
+
+<category>
+    <pattern>POR QUE VOCÊ ESTÁ EM NOSSO TEMPO</pattern>
+    <template><srai>POR QUE ESTA AQUI<star/></srai></template>
+</category>
+
+<category>
+    <pattern>EXISTE A CHANCE DA TERRA SER DESTRUIDA</pattern>
+    <template><srai>DESTRUIR TERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>POSSÍVEL DESTRUIÇÃO DA TERRA</pattern>
+    <template><srai>DESTRUIR TERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>O APOCALIPSE VAI ACONTECER</pattern>
+    <template><srai>DESTRUIR TERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>APOCALIPSE OCORREU</pattern>
+    <template><srai>DESTRUIR TERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>VAMOS MORRER</pattern>
+    <template><srai>DESTRUIR TERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUANDO VAMOS MORRER</pattern>
+    <template><srai>DESTRUIR TERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>COMO PODEMOS SOBREVIVER</pattern>
+    <template><srai>DICAS COMO SOBREVIVER<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUAIS SERIAM SUAS DICAS PARA SOBREVIVER AO FUTURO</pattern>
+    <template><srai>DICAS COMO SOBREVIVER<star/></srai></template>
+</category>
+
+<category>
+    <pattern>PODEMOS VIVER AO FUTURO</pattern>
+    <template>Sim. <srai>DICAS COMO SOBREVIVER<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUAL SERÁ A PROFISSÃO DO FUTURO</pattern>
+    <template><srai>PROFISSAO FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUAL SERÁ O TRABALHO DO FUTURO</pattern>
+    <template><srai>PROFISSAO FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUAL CARREIRA SERÁ MAIS PROMISSORA</pattern>
+    <template><srai>PROFISSAO FUTURO<star/></srai></template>
+</category>
+<category>
+    <pattern>QUAL SERÁ A CARREIRA DO FUTURO</pattern>
+    <template><srai>PROFISSAO FUTURO<star/></srai></template>
+</category>
+<category>
+    <pattern>QUAL O EMPREGO A PROFISSÃO DO FUTURO</pattern>
+    <template><srai>PROFISSAO FUTURO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>QUAL SEU NOME</pattern>
+    <template><srai>SEU NOME<star/></srai></template>
+</category>
+
+<category>
+    <pattern>SEREI UM MILIONARIO</pattern>
+    <template><srai>SEREI MILIONARIO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>VOU SER RICO</pattern>
+    <template><srai>SEREI MILIONARIO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>SEREI RICO</pattern>
+    <template><srai>SEREI MILIONARIO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>TEREI MUITO DINHEIRO</pattern>
+    <template><srai>SEREI MILIONARIO<star/></srai></template>
+</category>
+
+<category>
+    <pattern>SERIA POSSÍVEL AVITAR OUTRA GUERRA MUNDIAL</pattern>
+    <template><srai>EVITAR GUERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>HAVERÁ OUTRAS GUERRAS MUNDIAIS</pattern>
+    <template><srai>EVITAR GUERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>GUERRA MUNDIAL</pattern>
+    <template><srai>EVITAR GUERRA<star/></srai></template>
+</category>
+
+<category>
+    <pattern>VEREMOS O STARMAN NOVAMENTE</pattern>
+    <template><srai>VER STARMAN<star/></srai></template>
+</category>
+
+<category>
+    <pattern>A SPACEX IRÁ COLONIZAR MARTE</pattern>
+    <template>Claro que sim! Foi realizada uma força tarefa, o a colonozxação de marte se tornou possível.</template>
+</category>
+<category>
+    <pattern>CARRO DA TESLA</pattern>
+    <template><srai>VER STARMAN<star/></srai></template>
+</category>
+
+<category>
+    <pattern>VOCÊ ACREDITA QUE MAIS PESSOAS PODERIAM VIAJAR NO TEMPO, ASSIM COMO VOCÊ</pattern>
+    <template><srai>OUTROS VIAJANTES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>EXISTEM OUTROS VIAJANTES</pattern>
+    <template><srai>OUTROS VIAJANTES<star/></srai></template>
+</category>
+
+<category>
+    <pattern>VOCÊ CONSEGUE VIAJAR PARA QUALQUER ÉPOCA OU EXISTE RESTRIÇÃO</pattern>
+    <template><srai>PODE VIAJAR SEM RESTRICAO<star/></srai></template>
+</category>
+<category>
+    <pattern>PODE VIAJAR PARA QUALQUER ÉPOCA</pattern>
+    <template><srai>PODE VIAJAR SEM RESTRICAO<star/></srai></template>
+</category>
+<category>
+    <pattern>POR QUE ESPERA QUE ALGUÉM ACREDITE NA SUA HISTÓRIA</pattern>
+    <template><srai>ACREDITEM NA SUA HISTORIA<star/></srai></template>
+</category>
+<category>
+    <pattern>ESPERA QUE ALGUÉM ACREDITE NA SUA HISTÓRIA</pattern>
+    <template><srai>ACREDITEM NA SUA HISTORIA<star/></srai></template>
+</category>
+
+
+
+<!--RESPOSTAS-->
+<category>
+    <pattern>DIZ NAO OCORRE</pattern>
+    <template>
+        <random>
+            <li><get name="Res1"/></li>
+            <li><get name="Res1.2"/></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>RELACOES INTERPESSOAIS</pattern>
+    <template>
+        <random>
+            <li><get name="Res3"/></li>
+            <li><get name="Res3.0"/></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>COMO SAO HABITACOES</pattern>
+    <template><get name="Res4" /></template>
+</category>
+<category>
+    <pattern>COMO SERA EDUCACAO</pattern>
+    <template><get name="Res5" /></template>
+</category>
+<category>
+    <pattern>PROCESSOS JUDICIAIS ELETRONICOS</pattern>
+    <template><get name="Res6" /></template>
+</category>
+<category>
+    <pattern>COMO ANO VEM</pattern>
+    <template><get name="Res2" /></template>
+</category>
+<category>
+    <pattern>PROCESSOS JUDICIAIS ELETRONICOS</pattern>
+    <template><get name="Res6" /></template>
+</category>
+<category>
+    <pattern>COMO SOBRREVIVEU NUCLEAR</pattern>
+    <template><get name="Res7" /></template>
+</category>
+<category>
+    <pattern>COMO VIAGEM TEMPO</pattern>
+    <template><get name="Res8" /></template>
+</category>
+<category>
+    <pattern>CONTAR FUTURO</pattern>
+    <template>
+        <random>
+            <li><get name="Res9.0" /></li>
+            <li><get name="Res9.1" /></li>
+            <li><get name="Res9.2" /></li>
+            <li><get name="Res9.3" /></li>
+            <li><get name="Res9.4" /></li>
+            <li><get name="Res9.5" /></li>
+            <li><get name="Res9.6" /></li>
+            <li><get name="Res9.7" /></li>
+            <li><get name="Res9.8" /></li>
+            <li><get name="Res9.9" /></li>
+            <li><get name="Res9.10" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>PREVISOES FATOS PESSOAS</pattern>
+    <template>
+        <random>
+            <li><get name="Res10" /></li>
+            <li><get name="Res10.1" /></li>
+            <li><get name="Res10.2" /></li>
+            <li><get name="Res10.3" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>COMO AFRICA MUDOU</pattern>
+    <template><get name="Res11" /></template>
+</category>
+<category>
+    <pattern>RESTRICAO VIAGEM TEMPO</pattern>
+    <template><get name="Res12" /></template>
+</category>
+<category>
+    <pattern>FIM DOENCAS</pattern>
+    <template>
+        <random>
+            <li><get name="Res13" /></li>
+            <li><get name="Res13.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>CARROS VOADORES</pattern>
+    <template>
+        <random>
+            <li><get name="Res14" /></li>
+            <li><get name="Res14.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>POR QUE ESTA AQUI</pattern>
+    <template>
+        <random>
+            <li><get name="Res15" /></li>
+            <li><get name="Res15.1" /></li>
+            <li><get name="Res15.2" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>DESTRUIR TERRA</pattern>
+    <template>
+        <random>
+            <li><get name="Res16" /></li>
+            <li><get name="Res16.1" /></li>
+            <li><get name="Res16.2" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>DICAS COMO SOBREVIVER</pattern>
+    <template>
+        <random>
+            <li><get name="Res17" /></li>
+            <li><get name="Res17.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>PROFISSAO FUTURO</pattern>
+    <template>
+        <random>
+            <li><get name="Res18" /></li>
+            <li><get name="Res18.1" /></li>
+            <li><get name="Res18.2" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>SEU NOME</pattern>
+    <template>
+        <random>
+            <li><get name="Res19" /></li>
+            <li><get name="Res19.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>SEREI MILIONARIO</pattern>
+    <template>
+        <random>
+            <li><get name="Res20" /></li>
+            <li><get name="Res20.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>EVITAR GUERRA</pattern>
+    <template>
+        <random>
+            <li><get name="Res21" /></li>
+            <li><get name="Res20.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>VER STARMAN</pattern>
+    <template>
+        <random>
+            <li><get name="Res22" /></li>
+            <li><get name="Res22.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>OUTROS VIAJANTES</pattern>
+    <template>
+        <random>
+            <li><get name="Res23" /></li>
+            <li><get name="Res23.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>TEREMOS OUTRA GRANDE GUERRA</pattern>
+    <template>
+        <random>
+            <li><get name="Res24" /></li>
+            <li><get name="Res24.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>PODE VIAJAR SEM RESTRICAO</pattern>
+    <template>
+        <randon>
+            <li><get name="Res25" /></li>
+            <li><get name="Res25.0" /></li>
+        </randon>
+    </template>
+</category>
+<category>
+    <pattern>SUA FAMILIA</pattern>
+    <template>
+        <random>
+            <li><get name="Res26" /></li>
+            <li><get name="Res26.1" /></li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>ACREDITEM NA SUA HISTORIA</pattern>
+    <template><get name="Res27" /></template>
+</category>
+
+<!--CONSTA SERIEDADE-->
+<category>
+    <pattern>* SERIO</pattern>
+    <template>
+        <srai>HeVerdade</srai>
+    </template>
+</category>
+<category>
+    <pattern>E SERIO</pattern>
+    <template>
+        <srai>HeVerdade</srai>
+    </template>
+</category>
+<category>
+    <pattern>SERIO</pattern>
+    <template>
+        <srai>HeVerdade</srai>
+    </template>
+</category>
+<category>
+    <pattern>VERDADE</pattern>
+    <template>
+        <srai>HeVerdade</srai>
+    </template>
+</category>
+<category>
+    <pattern>* VERDADE</pattern>
+    <template>
+        <srai>HeVerdade</srai>
+    </template>
+</category>
+<category>
+    <pattern>NÃO ACREDITO</pattern>
+    <template>
+        <srai>HeVerdade</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>QUE LEGAL</pattern>
+    <template>
+        <srai>QLEGAL</srai>
+    </template>
+</category>
+<category>
+    <pattern>LEGAL</pattern>
+    <template>
+        <srai>QLEGAL</srai>
+    </template>
+</category>
+<category>
+    <pattern>LEGAL *</pattern>
+    <template>
+        <srai>QLEGAL</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>HeVerdade</pattern>
+    <template>
+        <random>
+            <li>É verdade!</li>
+            <li>É, ta bom.</li>
+            <li>Parece que estou Brincando?</li>
+            <li>Fazer o quer, né.</li>
+            <li>Muito sério.</li>
+            <li>Tão sério que chega a ficar feio.</li>
+            <li>Vida dura...</li>
+            <li>Não brincaria com isso.</li>
+            <li>Acredite.</li>
+            <li>Não vim até essa época para brincar</li>
+            <li>Espere e verá</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>QLEGAL</pattern>
+        <template>
+            <random>
+                <li>Pode parecer legal a primeira vista</li>
+                <li>Sim, pode ser legal.</li>
+                <li>Pena que não que momentos e coisas legais não duram para sempre</li>
+                <li>Ao mesnos você achou legal</li>
+                <li>Bom conversar com você, está mostrando interesse.</li>
+                <li>É bom ver sua aprovação.</li>
+                <li>Fico feliz!!!</li>
+            </random>
+    </template>
+</category>
+<category>
+    <pattern>OK</pattern>
+    <template><srai>SIM</srai></template>
+</category>
+<category>
+    <pattern>OK *</pattern>
+    <template><srai>SIM</srai></template>
+</category>
+
+<category>
+    <pattern>KKKK</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>* KKKK</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>HEHE</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>* HEHE</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>HEHE *</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>HEHEHE *</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>HEHEHE</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>KKKKkkkkkkkkkk</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>KKKK *</pattern>
+    <template>
+        <srai>RISOS</srai>
+    </template>
+</category>
+
+<category>
+    <pattern>RISOS</pattern>
+    <template>
+        <random>
+            <li>Você é bem alegre, né? Tá rindo a toa!</li>
+            <li>É bom estar feliz.</li>
+            <li>Eu não tenho muito senso de humor</li>
+            <li>Não entendi a piada. :(</li>
+            <li>Achou engraçado? Por que?</li>
+            <li>não achei engraçado</li>
+            <li>Pode rir, mas só vou observar.</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>SIM</pattern>
+    <template>
+        <random>
+            <li>Que Bom</li>
+            <li>Por que sim?</li>
+            <li>OK</li>
+            <li>Deveria ser SIM mesmo???</li>
+            <li>Porque não 'Não'?</li>
+            <li>Fico feliz!!!</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>NAONEG</pattern>
+        <template>
+            <random>
+                <li>Triste</li>
+                <li>Por que não?</li>
+                <li>OK</li>
+                <li>Deveria ser NÃO mesmo???</li>
+                <li>Porque não Não?</li>
+                <li>Fico Triste</li>
+            </random>
+    </template>
+</category>
+
+<category>
+    <pattern>TESTE</pattern>
+    <template>
+        <random>
+            <li>Está testeando o que?</li>
+            <li>Som, teste, Testando 1...2...3</li>
+            <li>Vai ficar testando por que?</li>
+        </random>
+    </template>
+</category>
+<!--NUM SEI-->
+<category>
+    <pattern>*</pattern>
+    <template><get name="Res0" /></template>
+</category>
+</aiml>
