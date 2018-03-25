@@ -6,43 +6,38 @@
 #include <stdlib.h>
 #include <vector>
 #include <cstring>
-
 using namespace std;
-
-bool MasterShell()
-{
-    printf("pcname:~$ ");
-    char linha[5000];
-    * linha = 0;
-    scanf(" %[^\n]", linha);
+bool MasterShell(){
+    printf("=>> ");
+    char entrada[5000];
+    * entrada = 0;
+    scanf(" %[^\n]", entrada);
     vector<char*> args;
-    char* principal = strtok(linha," ");
-    char* tmp = principal;
-    if ( strcmp( principal , "exit" ) == 0 )
+    char* prin = strtok(entrada," ");
+    char* tmp = prin;
+    if ( strcmp( prin , "exit" ) == 0 )
         return false;
-    while ( tmp != NULL )
-    {
+    while ( tmp != NULL ){
        args.push_back( tmp );
        tmp = strtok( NULL, " " );
     }
-    char** argumentos = new char*[args.size()+1];
+    char** arg = new char*[args.size()+1];
     for ( int k = 0; k < args.size(); k++ )
-          argumentos[k] = args[k];
-    argumentos[(int)args.size()] = 0;
+          arg[k] = args[k];
+    arg[(int)args.size()] = 0;
     pid_t pid;
     pid = fork();
     if(pid < 0){
-        printf("Falha ao criar fork para execucao de comando");
-        exit(1);
+        printf("Falha ao criar fork");
+        return false;
     }else{
         if(pid==0){
-            execvp(principal, argumentos);
-            perror( linha );
+            execvp(prin, arg);
+            perror( entrada );
             return false;
         }else{
-            if(waitpid( pid, 0, 0 ) < 0)
-            {
-                perror("Processo filho nao respondeu ");
+            if(waitpid( pid, 0, 0 ) < 0){
+                printf("Filho não respondeu ");
                 return false;
             }
         }
@@ -50,8 +45,7 @@ bool MasterShell()
     return true;
 }
 
-int main()
-{
-    while (MasterShell());
+int main(){
+    while (MasterShell() == true);
     return 0;
 }

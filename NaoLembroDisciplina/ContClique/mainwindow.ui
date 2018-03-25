@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>218</width>
+    <height>242</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cont Clique</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="file.qrc">
+    <normaloff>:/new/prefix1/Click-Here-Amazon.png</normaloff>:/new/prefix1/Click-Here-Amazon.png</iconset>
+  </property>
+  <property name="animated">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="BtnClique">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Clique</string>
+      </property>
+      <property name="autoRepeat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>218</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArquivo">
+    <property name="title">
+     <string>Arquivo</string>
+    </property>
+    <addaction name="actionSelecionar_Arquivo"/>
+    <addaction name="separator"/>
+    <addaction name="actionAjuda"/>
+    <addaction name="separator"/>
+    <addaction name="actionSobre"/>
+   </widget>
+   <addaction name="menuArquivo"/>
+  </widget>
+  <action name="actionSelecionar_Arquivo">
+   <property name="icon">
+    <iconset resource="file.qrc">
+     <normaloff>:/new/prefix1/Click-Here-Amazon.png</normaloff>:/new/prefix1/Click-Here-Amazon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Selecionar Arquivo</string>
+   </property>
+  </action>
+  <action name="actionSobre">
+   <property name="icon">
+    <iconset resource="file.qrc">
+     <normaloff>:/new/prefix1/Info.png</normaloff>:/new/prefix1/Info.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sobre</string>
+   </property>
+  </action>
+  <action name="actionAjuda">
+   <property name="icon">
+    <iconset resource="file.qrc">
+     <normaloff>:/new/prefix1/message-24-help.png</normaloff>:/new/prefix1/message-24-help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ajuda</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="file.qrc"/>
+ </resources>
+ <connections/>
+</ui>

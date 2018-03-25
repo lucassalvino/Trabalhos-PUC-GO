@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>Click-Here-Amazon.png</file>
+        <file>message-24-help.png</file>
+        <file>Info.png</file>
+    </qresource>
+</RCC>
