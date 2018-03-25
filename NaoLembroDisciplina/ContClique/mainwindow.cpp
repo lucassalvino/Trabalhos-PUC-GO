@@ -46,7 +46,7 @@ void MainWindow::on_actionSelecionar_Arquivo_triggered()
 
 void MainWindow::on_actionSobre_triggered()
 {
-    QMessageBox::about(this, "Sobre","Criado por Lucas Salvino de Deus\n Qualquer problema, bug, dúvida ou sujestão entre em contato:\n \t\tlucassalvino1@gmail.com");
+    QMessageBox::about(this, "Sobre","Criado por Lucas Salvino de Deus\n Qualquer problema, bug, dúvida ou sujestão entre em contato:\n \t\tlucassalvino1@gmail.com\n \t\thttps://github.com/lucassalvino");
 }
 
 void MainWindow::on_actionAjuda_triggered()
