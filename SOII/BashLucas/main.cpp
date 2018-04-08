@@ -38,6 +38,7 @@ string GetShellBash()
 }
 
 void executeExecCommand(vector<char*> args);
+
 void executCommmand (vector<char*> args)
 {
     if(args.size() <= 0) return;
@@ -79,6 +80,9 @@ bool ContinueForkCommand(vector<char*> args)
         executeExecCommand(args);
         exit(0);
         return false;
+    }
+    if(strcmp(args[(int)args.size()-1], "&") == 0)
+    {
     }
     return true;
 }
