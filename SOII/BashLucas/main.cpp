@@ -16,7 +16,7 @@
 using namespace std;
 
 string GetHost()
-{
+{//get nome da maquina
     char ret[255];
     * ret = 0;
     gethostname(ret, sizeof(ret));
@@ -24,7 +24,7 @@ string GetHost()
 }
 
 string GetShellBash()
-{
+{//monta string a ser exibida como promtp
     char atual [1225];
     * atual = 0;
     if(getcwd(atual, sizeof(atual)) == 0)
@@ -42,7 +42,7 @@ string GetShellBash()
 void executeExecCommand(vector<char*> args);
 
 void executCommmand (vector<char*> args)
-{
+{//executa um commando e seus argumentos
     if(args.size() <= 0) return;
 
     if(strcmp(args[0], "exec") == 0)
@@ -58,17 +58,17 @@ void executCommmand (vector<char*> args)
 }
 
 void executeExecCommand(vector<char*> args)
-{
-    args.erase(args.begin());
-    executCommmand(args);
-    exit(1);
+{//executa um comando com exec
+    args.erase(args.begin());//tira exec
+    executCommmand(args);//executa comando
+    exit(1);//xau
 }
 
 bool ContinueForkCommand(vector<char*> args)
-{
+{//verifica se é para fazer o fork
     if(args.size() <= 0) return false; // no imput the command
 
-    if(strcmp(args[0], "cd") == 0)
+    if(strcmp(args[0], "cd") == 0) // trata 'cd'
     {
         if((int)args.size() != 2)
             throw "O comando CD espera um parametro";
@@ -77,13 +77,13 @@ bool ContinueForkCommand(vector<char*> args)
             throw "Diretorio nao existe ou está inacessível";
         return false;
     }
-    if(strcmp(args[0], "exec") == 0)
+    if(strcmp(args[0], "exec") == 0)//trata 'exec'
     {
         executeExecCommand(args);
         exit(0);
         return false;
     }
-    if(strcmp(args[(int)args.size()-1], "&") == 0)
+    if(strcmp(args[(int)args.size()-1], "&") == 0)// trata '&'
     {
         args.erase(args.end()-1);
         std::async(executCommmand,args);
@@ -92,7 +92,7 @@ bool ContinueForkCommand(vector<char*> args)
     return true;
 }
 
-bool MasterShell(){
+bool MasterShell(){//fluxo principal do shell
     char entrada[5000];
     printf("%s", GetShellBash().c_str());
     scanf(" %[^\n]", entrada);
@@ -123,7 +123,7 @@ bool MasterShell(){
             executCommmand(args);
             return false;
         }else{
-            if(waitpid( pid, 0, 0 ) < 0){
+            if(waitpid( pid, 0, 0 ) < 0){// aguarda conclusao do processo filho
                 printf("Filho não respondeu ");
                 return false;
             }
