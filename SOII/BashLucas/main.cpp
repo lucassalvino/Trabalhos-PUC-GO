@@ -10,6 +10,8 @@
 #include <dirent.h>
 #include <iostream>
 #include <unistd.h>
+#include <algorithm>
+#include <future>
 
 using namespace std;
 
@@ -83,6 +85,9 @@ bool ContinueForkCommand(vector<char*> args)
     }
     if(strcmp(args[(int)args.size()-1], "&") == 0)
     {
+        args.erase(args.end()-1);
+        std::async(executCommmand,args);
+        return false;
     }
     return true;
 }
