@@ -15,6 +15,26 @@ using namespace std;
 
 void trataSignal(int sig);
 void executeExecCommand(vector<char*> args);
+void executCommmand (vector<char*> args);
+void runFork(vector<char*> args, bool esperaFilho = true)
+{
+    pid_t pid;
+    pid = fork();
+    if(pid < 0){
+        printf("Falha ao criar fork");
+    }
+    else
+    {
+        if(pid==0){
+            executCommmand(args);
+        }else{
+            if(esperaFilho)
+                if(waitpid( pid, 0, 0 ) < 0){// aguarda conclusao do processo filho
+                    printf("Filho não respondeu ");
+                }
+        }
+    }
+}
 
 string GetHost()
 {//get nome da maquina
@@ -85,7 +105,7 @@ bool ContinueForkCommand(vector<char*> args)
     if(strcmp(args[(int)args.size()-1], "&") == 0)// trata '&'
     {
         args.erase(args.end()-1);
-        std::async(executCommmand,args);
+        runFork(args, false);
         return false;
     }
     return true;
@@ -110,24 +130,8 @@ bool MasterShell(){//fluxo principal do shell
 
     if(!ContinueForkCommand(args))return true;
 
-    pid_t pid;
-    pid = fork();
-    if(pid < 0){
-        printf("Falha ao criar fork");
-        return false;
-    }
-    else
-    {
-        if(pid==0){
-            executCommmand(args);
-            return false;
-        }else{
-            if(waitpid( pid, 0, 0 ) < 0){// aguarda conclusao do processo filho
-                printf("Filho não respondeu ");
-                return false;
-            }
-        }
-    }
+    runFork(args);
+
     return true;
 }
 
