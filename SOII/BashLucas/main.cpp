@@ -1,7 +1,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
@@ -9,11 +8,13 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <iostream>
-#include <unistd.h>
-#include <algorithm>
 #include <future>
+#include <signal.h>
 
 using namespace std;
+
+void trataSignal(int sig);
+void executeExecCommand(vector<char*> args);
 
 string GetHost()
 {//get nome da maquina
@@ -38,8 +39,6 @@ string GetShellBash()
     if(caminhoAtual == string("/"))folder = "/";
     return string (GetHost() + ":" +folder+ "$ ");
 }
-
-void executeExecCommand(vector<char*> args);
 
 void executCommmand (vector<char*> args)
 {//executa um commando e seus argumentos
@@ -102,7 +101,7 @@ bool MasterShell(){//fluxo principal do shell
     char* tmp = prin;
 
     if ( strcmp( prin , "exit" ) == 0 )
-        return false;
+        exit(0);
 
     while ( tmp != NULL ){
         args.push_back( tmp );
@@ -133,6 +132,20 @@ bool MasterShell(){//fluxo principal do shell
 }
 
 int main(){
+    signal(SIGINT, trataSignal);
     while (MasterShell());
     return 0;
+}
+
+void trataSignal(int sig)
+{//identifica e trata o ctrl+c
+    char  c;
+    signal(sig, SIG_IGN);
+    printf("\nCtrl-C? [s/n] ");
+    c = getchar();
+    if (c == 's' || c == 'S')
+        exit(0);
+    else{
+        main();
+    }
 }
