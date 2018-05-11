@@ -16,6 +16,7 @@ using namespace std;
 void trataSignal(int sig);
 void executeExecCommand(vector<char*> args);
 void executCommmand (vector<char*> args);
+void executPipeCommands (vector<char*> args);
 void runFork(vector<char*> args, bool esperaFilho = true)
 {
     pid_t pid;
@@ -76,6 +77,28 @@ void executCommmand (vector<char*> args)
     perror( args[0] );
 }
 
+void executPipeCommands (vector<char*> args){
+    int i;
+    for( i=1; i<(int)args.size()-1; i++)
+    {
+        int pd[2];
+        pipe(pd);
+
+        if (!fork()) {
+            dup2(pd[1], 1); // remap output back to parent
+            execlp(args[i], args[i], NULL);
+            perror("exec");
+            abort();
+        }
+
+        // remap output from previous child to input
+        dup2(pd[0], 0);
+        close(pd[1]);
+    }
+    execlp(args[i], args[i], NULL);
+    perror("exec");
+}
+
 void executeExecCommand(vector<char*> args)
 {//executa um comando com exec
     args.erase(args.begin());//tira exec
@@ -111,10 +134,41 @@ bool ContinueForkCommand(vector<char*> args)
     return true;
 }
 
+bool TrataPipe(char * entrada){
+    vector<char*> args;
+    char* prin = strtok(entrada," ");
+    char* tmp = prin;
+
+    while ( tmp != NULL ){
+        args.push_back( tmp );
+        tmp = strtok( NULL, " " );
+    }
+    pid_t pid;
+    pid = fork();
+    if(pid < 0){
+        printf("Falha ao criar fork");
+    }
+    else
+    {
+        if(pid==0){
+            executPipeCommands(args);
+        }else{
+            if(waitpid( pid, 0, 0 ) < 0){// aguarda conclusao do processo filho
+                printf("Filho não respondeu ");
+            }
+        }
+    }
+    return true;
+}
+
 bool MasterShell(){//fluxo principal do shell
     char entrada[5000];
     printf("%s", GetShellBash().c_str());
     scanf(" %[^\n]", entrada);
+
+    char * pipe = strchr(entrada,'|');
+    if(pipe!=0)
+        return  TrataPipe(entrada);
 
     vector<char*> args;
     char* prin = strtok(entrada," ");
@@ -134,7 +188,6 @@ bool MasterShell(){//fluxo principal do shell
 
     return true;
 }
-
 int main(){
     signal(SIGINT, trataSignal);
     while (MasterShell());
@@ -153,3 +206,4 @@ void trataSignal(int sig)
         main();
     }
 }
+
