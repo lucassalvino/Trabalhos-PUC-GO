@@ -4,4 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 LIBS += -lpthread
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    produtor.cpp \
+    consumidor.cpp
+
+HEADERS += \
+    definicaodados.h
