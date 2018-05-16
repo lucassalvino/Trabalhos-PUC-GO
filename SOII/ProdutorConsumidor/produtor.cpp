@@ -25,7 +25,6 @@ int main(){
 
     sem_init(&instanciaMemoriaCompartilhada->pos_vazia, 0, TAMANHO_BUFFER);
     sem_init(&instanciaMemoriaCompartilhada->pos_ocupada, 0, 0);
-    instanciaMemoriaCompartilhada->inicialidado = true;
     int i = 0;
     while(true)
     {

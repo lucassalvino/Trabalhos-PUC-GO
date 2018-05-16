@@ -18,9 +18,7 @@ struct StructMemoriaCompartilhada {
     sem_t pos_vazia; //semafaro buffer vazio
     sem_t pos_ocupada; //semafaro com buffer ocupado
     int inicio, final;
-    bool inicialidado;
     StructMemoriaCompartilhada(){
-        inicialidado = false;
         inicio = final = 0;
     }
 };
