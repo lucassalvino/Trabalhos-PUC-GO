@@ -10,6 +10,8 @@
 #include <iostream>
 #include <future>
 #include <signal.h>
+#include <fcntl.h>
+#include <sstream>
 
 using namespace std;
 
@@ -77,21 +79,31 @@ void executCommmand (vector<char*> args)
     perror( args[0] );
 }
 
+void RedirecionamentoEntrada(vector<char*> args, string file){
+    int pid = fork();
+    if(pid == 0){
+        int fd = open(file.c_str(),O_WRONLY);
+        dup2(fd, 1);// redireciona entrada para arquivo file
+        dup2(fd, 2);
+        close (fd);
+        executCommmand(args);
+    }
+}
+
+//http://man7.org/linux/man-pages/man2/pipe.2.html
 void executPipeCommands (vector<char*> args){
     int i;
     for( i=1; i<(int)args.size()-1; i++)
     {
-        int pd[2];
+        int pd[2];//Extremidades dos pipe
         pipe(pd);
-
         if (!fork()) {
-            dup2(pd[1], 1); // remap output back to parent
+            dup2(pd[1], 1); // saída de volta para o pai
             execlp(args[i], args[i], NULL);
             perror("exec");
             abort();
         }
-
-        // remap output from previous child to input
+        //saída do filho anterior para entrada
         dup2(pd[0], 0);
         close(pd[1]);
     }
@@ -134,6 +146,23 @@ bool ContinueForkCommand(vector<char*> args)
     return true;
 }
 
+bool TrataRedirecionamentoEntrada(char * entrada){
+    vector<char*> args;
+    char* prin = strtok(entrada," ");
+    char* tmp = prin;
+
+    while (tmp != NULL && strcmp(tmp,"<")==0){
+        args.push_back( tmp );
+        tmp = strtok( NULL, " " );
+    }
+    string file;
+    if(strcmp(tmp, "<")==0){
+        tmp = strtok( NULL, " " );
+    }
+    file = string(file);
+    RedirecionamentoEntrada(args, file);
+}
+
 bool TrataPipe(char * entrada){
     vector<char*> args;
     char* prin = strtok(entrada," ");
@@ -170,6 +199,10 @@ bool MasterShell(){//fluxo principal do shell
     if(pipe!=0)
         return  TrataPipe(entrada);
 
+    char * entr = strchr(entrada,'<');
+    if(entr!=0)
+        return TrataRedirecionamentoEntrada(entrada);
+
     vector<char*> args;
     char* prin = strtok(entrada," ");
     char* tmp = prin;
@@ -188,6 +221,7 @@ bool MasterShell(){//fluxo principal do shell
 
     return true;
 }
+
 int main(){
     signal(SIGINT, trataSignal);
     while (MasterShell());
