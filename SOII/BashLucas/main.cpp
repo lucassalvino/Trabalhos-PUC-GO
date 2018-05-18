@@ -86,29 +86,48 @@ void executCommmand (vector<char*> args)
 }
 
 void RedirecionamentoEntrada(char* entrada){
-    char* parametros [255];
-    string line(entrada), cmd, arquivo;
-    pid_t pid;
+    pid_t pid = fork();
+    if(pid < 0){
+        printf("Falha ao gerar fork");
+    }else{
+        if(pid==0){
+            char* parametros [255];
+            string line(entrada), cmd, arquivo;
+            int in;
+            splitRedirecionamento(line,'<',cmd,arquivo);
+            in = open(arquivo.c_str(),O_RDONLY);
+            dup2(in, 0);
+            close(in);
+            execvp(parametros[0], parametros);
+            //exit(0);
+        }
+        else{
+            wait(NULL);
+        }
+    }
+    /*pid_t pid;
     pid = fork();
-    if (pid < 0) { //error
-        cout << "Fork Failed \n";
+    if (pid == -1) { //error
+        printf("Falha ao criar fork");
         return;
     }
-    else if (pid == 0) {
-        splitRedirecionamento(line,'<',cmd,arquivo);
+    if (pid == 0) {
+
         parseArgs(cmd,parametros);
         //close stdin
-        close(0);
+
         //open file
-        open(arquivo.c_str(),O_RDONLY);
+        in = open(arquivo.c_str(),O_RDONLY);
+
+        dup2(in, 0);
+        close(in);
 
         execvp(parametros[0], parametros);
-        cout << "Error, execvp failed. \n";
         exit(0);
     }
     else {
         wait (NULL);
-    }
+    }*/
 }
 
 void RedirecionamentoSaida(char *entrada){
@@ -116,11 +135,11 @@ void RedirecionamentoSaida(char *entrada){
     string line(entrada), cmd, file;
     pid_t pid;
     pid = fork();
-    if (pid < 0) { //error
+    if (pid ==-1) { //error
         printf("Falha ao criar fork");
         return;
     }
-    else if (pid == 0) {
+    if (pid == 0) {
         splitRedirecionamento(line,'>',cmd,file);
         parseArgs(cmd,parametros);
         close(1);
@@ -238,12 +257,16 @@ bool MasterShell(){//fluxo principal do shell
         return  TrataPipe(entrada);
 
     char * entr = strchr(entrada,'<');
-    if(entr!=0)
+    if(entr!=0){
+        *entr = 0;
         return TrataRedirecionamentoEntrada(entrada);
+    }
 
     entr = strchr(entrada,'>');
-    if(entr!=0)
+    if(entr!=0){
+        *entr = 0;
         return TrataRedirecionamentoSaida(entrada);
+    }
 
 
     vector<char*> args;
