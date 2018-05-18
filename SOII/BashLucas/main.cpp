@@ -85,49 +85,16 @@ void executCommmand (vector<char*> args)
     perror( args[0] );
 }
 
-void RedirecionamentoEntrada(char* entrada){
-    pid_t pid = fork();
-    if(pid < 0){
-        printf("Falha ao gerar fork");
-    }else{
-        if(pid==0){
-            char* parametros [255];
-            string line(entrada), cmd, arquivo;
-            int in;
-            splitRedirecionamento(line,'<',cmd,arquivo);
-            in = open(arquivo.c_str(),O_RDONLY);
-            dup2(in, 0);
-            close(in);
-            execvp(parametros[0], parametros);
-            //exit(0);
-        }
-        else{
-            wait(NULL);
-        }
+
+void RedirecionamentoEntrada(vector<char*> args, string file){
+    int pid = fork();
+    if(pid == 0){
+        int fd = open(file.c_str(),O_WRONLY);
+        dup2(fd, 1);// redireciona entrada para arquivo file
+        dup2(fd, 2);
+        close (fd);
+        executCommmand(args);
     }
-    /*pid_t pid;
-    pid = fork();
-    if (pid == -1) { //error
-        printf("Falha ao criar fork");
-        return;
-    }
-    if (pid == 0) {
-
-        parseArgs(cmd,parametros);
-        //close stdin
-
-        //open file
-        in = open(arquivo.c_str(),O_RDONLY);
-
-        dup2(in, 0);
-        close(in);
-
-        execvp(parametros[0], parametros);
-        exit(0);
-    }
-    else {
-        wait (NULL);
-    }*/
 }
 
 void RedirecionamentoSaida(char *entrada){
@@ -211,8 +178,21 @@ bool ContinueForkCommand(vector<char*> args)
 }
 
 bool TrataRedirecionamentoEntrada(char * entrada){
-    RedirecionamentoEntrada(entrada);
-    return true;
+    vector<char*> args;
+        char* prin = strtok(entrada," ");
+        char* tmp = prin;
+
+        while (tmp != NULL && strcmp(tmp,"<")==0){
+            args.push_back( tmp );
+            tmp = strtok( NULL, " " );
+        }
+        string file;
+        if(strcmp(tmp, "<")==0){
+            tmp = strtok( NULL, " " );
+        }
+        file = string(file);
+        RedirecionamentoEntrada(args, file);
+        return true;
 }
 
 bool TrataRedirecionamentoSaida(char * entrada){
@@ -258,13 +238,11 @@ bool MasterShell(){//fluxo principal do shell
 
     char * entr = strchr(entrada,'<');
     if(entr!=0){
-        *entr = 0;
         return TrataRedirecionamentoEntrada(entrada);
     }
 
     entr = strchr(entrada,'>');
     if(entr!=0){
-        *entr = 0;
         return TrataRedirecionamentoSaida(entrada);
     }
 
