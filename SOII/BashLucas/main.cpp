@@ -12,6 +12,9 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <sstream>
+#include <cstddef>
+#include <string>
+
 
 using namespace std;
 
@@ -19,6 +22,9 @@ void trataSignal(int sig);
 void executeExecCommand(vector<char*> args);
 void executCommmand (vector<char*> args);
 void executPipeCommands (vector<char*> args);
+void splitRedirecionamento( string str, char c, string &str1, string &str2);
+void parseArgs( string cmd, char * argv[]);
+
 void runFork(vector<char*> args, bool esperaFilho = true)
 {
     pid_t pid;
@@ -79,14 +85,53 @@ void executCommmand (vector<char*> args)
     perror( args[0] );
 }
 
-void RedirecionamentoEntrada(vector<char*> args, string file){
-    int pid = fork();
-    if(pid == 0){
-        int fd = open(file.c_str(),O_WRONLY);
-        dup2(fd, 1);// redireciona entrada para arquivo file
-        dup2(fd, 2);
-        close (fd);
-        executCommmand(args);
+void RedirecionamentoEntrada(char* entrada){
+    char* parametros [255];
+    string line(entrada), cmd, arquivo;
+    pid_t pid;
+    pid = fork();
+    if (pid < 0) { //error
+        cout << "Fork Failed \n";
+        return;
+    }
+    else if (pid == 0) {
+        splitRedirecionamento(line,'<',cmd,arquivo);
+        parseArgs(cmd,parametros);
+        //close stdin
+        close(0);
+        //open file
+        open(arquivo.c_str(),O_RDONLY);
+
+        execvp(parametros[0], parametros);
+        cout << "Error, execvp failed. \n";
+        exit(0);
+    }
+    else {
+        wait (NULL);
+    }
+}
+
+void RedirecionamentoSaida(char *entrada){
+    char* parametros[255];
+    string line(entrada), cmd, file;
+    pid_t pid;
+    pid = fork();
+    if (pid < 0) { //error
+        printf("Falha ao criar fork");
+        return;
+    }
+    else if (pid == 0) {
+        splitRedirecionamento(line,'>',cmd,file);
+        parseArgs(cmd,parametros);
+        close(1);
+        mode_t mode = 0644;
+        creat(file.c_str(),mode);
+        execvp(parametros[0], parametros);
+        printf("falha executar comando com redirecionamento de saida");
+        exit(0);
+    }
+    else {
+        wait (NULL);
     }
 }
 
@@ -147,20 +192,13 @@ bool ContinueForkCommand(vector<char*> args)
 }
 
 bool TrataRedirecionamentoEntrada(char * entrada){
-    vector<char*> args;
-    char* prin = strtok(entrada," ");
-    char* tmp = prin;
+    RedirecionamentoEntrada(entrada);
+    return true;
+}
 
-    while (tmp != NULL && strcmp(tmp,"<")==0){
-        args.push_back( tmp );
-        tmp = strtok( NULL, " " );
-    }
-    string file;
-    if(strcmp(tmp, "<")==0){
-        tmp = strtok( NULL, " " );
-    }
-    file = string(file);
-    RedirecionamentoEntrada(args, file);
+bool TrataRedirecionamentoSaida(char * entrada){
+    RedirecionamentoSaida(entrada);
+    return true;
 }
 
 bool TrataPipe(char * entrada){
@@ -203,6 +241,11 @@ bool MasterShell(){//fluxo principal do shell
     if(entr!=0)
         return TrataRedirecionamentoEntrada(entrada);
 
+    entr = strchr(entrada,'>');
+    if(entr!=0)
+        return TrataRedirecionamentoSaida(entrada);
+
+
     vector<char*> args;
     char* prin = strtok(entrada," ");
     char* tmp = prin;
@@ -241,3 +284,30 @@ void trataSignal(int sig)
     }
 }
 
+void splitRedirecionamento( string str, char c, string &str1, string &str2 )
+{
+    size_t pos = str.find( c );
+    str1 = str.substr( 0, pos );
+    pos = str.find_first_not_of( " \t", pos + 1 );
+    str2 = str.substr( pos );
+}
+
+void parseArgs( string cmd, char * argv[ ] )
+{
+    int argc = 0;
+    size_t start = 0;
+    size_t end = 0;
+    string arg;
+
+    while( end != string::npos  && argc < 255 - 1) {
+        start = cmd.find_first_not_of( " \t", end );
+        if( start == string::npos )
+            break;
+        end = cmd.find_first_of( " \t", start );
+        arg = cmd.substr( start, end - start );
+        argv[argc] = new char[arg.length( ) + 1];
+        strcpy(argv[argc], arg.c_str());
+        argc++;
+    }
+    argv[argc] = NULL;
+}
