@@ -86,14 +86,25 @@ void executCommmand (vector<char*> args)
 }
 
 
-void RedirecionamentoEntrada(vector<char*> args, string file){
-    int pid = fork();
-    if(pid == 0){
-        int fd = open(file.c_str(),O_WRONLY);
-        dup2(fd, 1);// redireciona entrada para arquivo file
-        dup2(fd, 2);
-        close (fd);
-        executCommmand(args);
+void RedirecionamentoEntrada(char *entrada){
+    char* parametros[255];
+    string line(entrada), cmd, file;
+    pid_t pid;
+    splitRedirecionamento(line,'<',cmd,file);
+    parseArgs(cmd,parametros);
+    pid = fork();
+    if (pid < 0) {
+        return;
+    }
+    else if (pid == 0) {
+        int fd = open(file.c_str(),O_RDONLY);
+        dup2(fd, 1);
+        close(fd);
+        execvp(parametros[0], parametros);
+        exit(0);
+    }
+    else {
+        wait (NULL);
     }
 }
 
@@ -178,21 +189,8 @@ bool ContinueForkCommand(vector<char*> args)
 }
 
 bool TrataRedirecionamentoEntrada(char * entrada){
-    vector<char*> args;
-        char* prin = strtok(entrada," ");
-        char* tmp = prin;
-
-        while (tmp != NULL && strcmp(tmp,"<")==0){
-            args.push_back( tmp );
-            tmp = strtok( NULL, " " );
-        }
-        string file;
-        if(strcmp(tmp, "<")==0){
-            tmp = strtok( NULL, " " );
-        }
-        file = string(file);
-        RedirecionamentoEntrada(args, file);
-        return true;
+    RedirecionamentoEntrada(entrada);
+    return true;
 }
 
 bool TrataRedirecionamentoSaida(char * entrada){
