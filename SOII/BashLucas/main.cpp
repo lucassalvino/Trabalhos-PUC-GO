@@ -21,7 +21,7 @@ using namespace std;
 void trataSignal(int sig);
 void executeExecCommand(vector<char*> args);
 void executCommmand (vector<char*> args);
-void executPipeCommands (vector<char*> args);
+void executPipeCommands (vector<char *> comandos);
 void splitRedirecionamento( string str, char c, string &str1, string &str2);
 void parseArgs( string cmd, char * argv[]);
 
@@ -133,32 +133,24 @@ void RedirecionamentoSaida(char *entrada){
     }
 }
 
-//http://man7.org/linux/man-pages/man2/pipe.2.html
-void executPipeCommands (vector<char*> args){
-    int i;
-    for( i=1; i<(int)args.size()-1; i++)
-    {
-        char** teste = new char* [(int)args.size()];
-
-        for(int j =0 ; j< (int)args.size(); j++)
-        {
-            strcpy(teste[j], args[j]);
-        }
-        int pd[2];//Extremidades dos pipe
-        pipe(pd);
-        if (!fork()) {
-            close(1);
-            dup2(pd[1], 1); // saída de volta para o pai
-            execvp(args[i],  teste);
-            perror("exec");
-            abort();
-        }
-        //saída do filho anterior para entrada
-        dup2(pd[0], 0);
-        close(pd[1]);
+int numeroEspacos(string value){
+    int i = 0, cont = 0;
+    while(value[i]!='\0'){
+        if(value[i]== ' ')
+            cont ++;
+        i++;
     }
-    execlp(args[i], args[i], NULL);
-    perror("exec");
+    return cont;
+}
+
+char** GetCommando (char * comando){
+    char** c1 = new char*[numeroEspacos(comando)];
+    int i = 0;
+    c1[i] = strtok(comando, " ");
+    while(c1[i]){
+        c1[++i] = strtok(NULL, " ");
+    }
+    return c1;
 }
 
 void executeExecCommand(vector<char*> args)
@@ -206,29 +198,51 @@ bool TrataRedirecionamentoSaida(char * entrada){
     return true;
 }
 
-bool TrataPipe(char * entrada){
-    vector<char*> args;
-    char* prin = strtok(entrada," ");
-    char* tmp = prin;
+void executPipeCommands (char * entrada){
+    vector<char*> comandos;
+    char * tmp = strtok( entrada, "|" );
+    comandos.push_back(tmp);
+    tmp = strtok( NULL, "|");
+    comandos.push_back(tmp);
+    char**comn1 = GetCommando(comandos[0]);
+    char**comn2 = GetCommando(comandos[1]);
+    int pfd[2];
+    pipe(pfd);
+    int idp;
+    switch (idp = fork()) {
+    case 0://filho
+        dup2(pfd[0], 0);
+        close(pfd[1]);	/* the child does not need this end of the pipe */
+        execvp(comn2[0], comn2);
+        perror(comn2[0]);
+        break;
+    default:
+        dup2(pfd[1], 1);
+        close(pfd[0]);	/* the parent does not need this end of the pipe */
+        execvp(comn1[0], comn1);
+        perror(comn1[0]);
+        break;
+    case -1:
+        perror("fork");
+        break;
+    }
+}
 
-    while ( tmp != NULL ){
-        args.push_back( tmp );
-        tmp = strtok( NULL, " " );
-    }
-    pid_t pid;
-    pid = fork();
-    if(pid < 0){
-        printf("Falha ao criar fork");
-    }
-    else
-    {
-        if(pid==0){
-            executPipeCommands(args);
-        }else{
-            if(waitpid( pid, 0, 0 ) < 0){// aguarda conclusao do processo filho
-                printf("Filho não respondeu ");
-            }
+
+bool TrataPipe(char * entrada){
+    int pid;
+    switch (pid = fork()) {
+    case 0:
+        executPipeCommands(entrada);
+        return true;
+    default:
+        if(waitpid( pid, 0, 0 ) < 0){// aguarda conclusao do processo filho
+            printf("Filho não respondeu ");
         }
+        break;
+    case -1:
+        perror("falha criar fork");
+        exit(1);
     }
     return true;
 }
