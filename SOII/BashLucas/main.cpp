@@ -98,7 +98,8 @@ void RedirecionamentoEntrada(char *entrada){
     }
     else if (pid == 0) {
         int fd = open(file.c_str(),O_RDONLY);
-        dup2(fd, 1);
+        close(0);
+        dup2(fd, 0);
         close(fd);
         execvp(parametros[0], parametros);
         exit(0);
@@ -137,11 +138,18 @@ void executPipeCommands (vector<char*> args){
     int i;
     for( i=1; i<(int)args.size()-1; i++)
     {
+        char** teste = new char* [(int)args.size()];
+
+        for(int j =0 ; j< (int)args.size(); j++)
+        {
+            strcpy(teste[j], args[j]);
+        }
         int pd[2];//Extremidades dos pipe
         pipe(pd);
         if (!fork()) {
+            close(1);
             dup2(pd[1], 1); // saída de volta para o pai
-            execlp(args[i], args[i], NULL);
+            execvp(args[i],  teste);
             perror("exec");
             abort();
         }
@@ -243,7 +251,6 @@ bool MasterShell(){//fluxo principal do shell
     if(entr!=0){
         return TrataRedirecionamentoSaida(entrada);
     }
-
 
     vector<char*> args;
     char* prin = strtok(entrada," ");
