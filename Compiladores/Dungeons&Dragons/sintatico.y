@@ -1,39 +1,24 @@
-%
-{
+%{
 	#include <stdio.h>
 	#include <stdlib.h>
-	#include <math.h>
-	#include <iostream>
-
-	extern FILE *yyin;
+	extern FILE*yyin;
 	extern int yylex();
-	void yyerror (const char * s);
-}
-%
+	void yyerror (const char *s);
+%}
 
-%token HANK
-%token ATIRA
-%token FLECHA
-%token PRESTO
-%token DISPARA
-%token RAIO
-%token ARCANO
-%token BOBBY
-%token USA
-%token TACAPE
-%token DIANA
-%token JOGA
-%token BASTAO
-%token MAGICO
-%token SHEILA
-%token INVISIVEL
-%token ATACA
-%token TIAMAT
-
+%start batalha
+%token HANK ATIRA FLECHA
+%token PRESTO DISPARA RAIO ARCANO
+%token BOBBY USA TACAPE
+%token DIANA JOGA BASTAO MAGICO
+%token SHEILA INVISIVEL ATACA TIAMAT
+%left FIM
 
 %%
-S : LOOPPRINCIPAL;
-LOOPPRINCIPAL : ACAODOSMENINOS | ACAODODRAGAO | LOOPPRINCIPAL;
+batalha : LOOPPRINCIPAL FIM;
+LOOPPRINCIPAL : ACAODOSMENINOS
+			  | ACAODODRAGAO
+			  ;
 ACAODODRAGAO : TIAMAT ATACA;
 ACAODOSMENINOS : ACAOHANK | ACAOPRESTO | ACAOBOBBY | ACAODIANA | ACAOSHEILA 
 ACAOHANK : HANK ATIRA FLECHA;
@@ -42,6 +27,11 @@ ACAOBOBBY : BOBBY USA TACAPE;
 ACAODIANA : DIANA JOGA BASTAO MAGICO;
 ACAOSHEILA : SHEILA INVISIVEL ATACA;
 %%
+
+void yyerror(const char *s){
+	printf("Erro aqui: %s", s);
+	exit(666);
+}
 
 int main(int argc, char ** argv){
 	FILE * arq;

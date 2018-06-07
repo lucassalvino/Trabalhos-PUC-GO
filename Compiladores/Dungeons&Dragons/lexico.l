@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include "sintatico.tab.h"
 #include "acoes.h"
-
-}%
+%}
 
 
 delim [\t\n]
@@ -17,10 +16,10 @@ erro .
 
 %%
 {erro} {printf("Erro Lexico. Caracter %c\n", yytext[0]);}
-{token_ACAOHANK} {executaJogadaMeninos(HANJK);}
-{token_ACAOPRESTO} {executaJogadaMeninos(PRESTO);}
-{token_ACAOBOBBY} {executaJogadaMeninos(BOBBY);}
-{token_ACAODIANA} {executaJogadaMeninos(DIANA);}
-{token_ACAOSHEILA} {executaJogadaMeninos(SHEILA);}
+{token_ACAOHANK} {executaJogadaMeninos(_HANK);}
+{token_ACAOPRESTO} {executaJogadaMeninos(_PRESTO);}
+{token_ACAOBOBBY} {executaJogadaMeninos(_BOBBY);}
+{token_ACAODIANA} {executaJogadaMeninos(_DIANA);}
+{token_ACAOSHEILA} {executaJogadaMeninos(_SHEILA);}
 {token_ACAODODRAGAO} {executaJogadaTiamat();}
 %%

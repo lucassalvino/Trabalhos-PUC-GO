@@ -1,15 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #define VIDAPADRAO 20000
 #define VIDATIAMAT 150000
-#define HANJK 0
-#define PRESTO 1
-#define BOBBY 2
-#define DIANA 3
-#define SHEILA 4
-#define ERICK 5
-#define TIAMAT 6
-
-#include "stdio.h"
-#include "stdlib.h"
+#define _HANK 0
+#define _PRESTO 1
+#define _BOBBY 2
+#define _DIANA 3
+#define _SHEILA 4
+#define _ERICK 5
+#define _TIAMAT 6
 
 int Vidas[7] = {0};
 
@@ -28,14 +28,14 @@ int D10(){
 	return DX(10);
 }
 
+void imprimeDadoJogadores(){
+	printf("\tDado Joagadores: [%d]\n\tDado Tiamat [%d]\n", dadoMeninos, dadoTiamat);
+}
+
 void atualizaDados(){
 	dadoMeninos = D20();
 	dadoTiamat = D10();
 	imprimeDadoJogadores();
-}
-
-void imprimeDadoJogadores(){
-	printf("\tDado Joagadores: [%d]\n\tDado Tiamat [%d]\n", dadoMeninos, dadoTiamat);
 }
 
 void inicializaVidas(){
@@ -56,19 +56,19 @@ void executaJogadaMeninos(int jogador){
 	bool defendeu = (dadoMeninos < dadoTiamat);
 
 	switch(jogador){
-		case HANJK:
+		case _HANK:
 		jogadaHank();
 		break;
-		case PRESTO:
+		case _PRESTO:
 		jogadaPresto();
 		break;
-		case BOBBY:
+		case _BOBBY:
 		jogadaBobby();
 		break;
-		case DIANA:
+		case _DIANA:
 		jogadaDiana();
 		break;
-		case SHEILA:
+		case _SHEILA:
 		jogadaSheila();
 		break;
 	}
@@ -88,7 +88,7 @@ void ataqueCabecaPreta(){}
 
 void executaJogadaTiamat(){
 	atualizaDados();
-	bool defendeu = (dadoTiamat < dadoMeninos && Vidas[ERICK] > 0);
+	bool defendeu = (dadoTiamat < dadoMeninos && Vidas[_ERICK] > 0);
 	int cabeca = rand()%5;
 	switch(cabeca){
 		case 0:
