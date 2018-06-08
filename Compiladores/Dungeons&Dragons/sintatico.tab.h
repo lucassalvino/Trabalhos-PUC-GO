@@ -62,8 +62,7 @@ extern int yydebug;
     SHEILA = 272,
     INVISIVEL = 273,
     ATACA = 274,
-    TIAMAT = 275,
-    FIM = 276
+    TIAMAT = 275
   };
 #endif
 
