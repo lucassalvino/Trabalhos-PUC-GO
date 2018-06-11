@@ -34,65 +34,69 @@ void imprimeDadoJogadores(){
 	for(int i = 0; i < 7; i++)
 		printf("\tPersonagem: %s\t Vida: %.2f\n", Nomes[i], Vidas[i]);
 	printf("\tDado Joagadores: [%d]\t\tDado Tiamat [%d]\n", dadoMeninos, dadoTiamat);
+	printf("\n\n\n\n\n");
 }
 
 void atualizaDados(){
 	dadoMeninos = D20();
 	dadoTiamat = D10();
-	imprimeDadoJogadores();
 }
 
-float pontosRetiradosDragao(){
+float pontosRetiradosDragao(int porcentagem){
 	if(Vidas[_TIAMAT]<=0){
 		printf("%s ja esta morto\n", Nomes[_TIAMAT]);
 		exit(-1);
 	}
-	int porcentagem = dadoMeninos - dadoTiamat;
-	if(porcentagem < 0)porcentagem *=-1;
 	return Vidas[_TIAMAT] * (porcentagem/100.0);
 }
 
-void jogadaHank(){
+int jogadaHank(){
 	printf("Hank atira uma flecha\n");
+	return 10;//porcentagem de dano de Hank
 }
-void jogadaPresto(){
+int jogadaPresto(){
 	printf("Presto dispara um raio arcano\n");
+	return 5;//porcentagem de dano de presto
 }
-void jogadaBobby(){
+int jogadaBobby(){
 	printf("Bobby usa a tacape\n");
+	return 15;//porcentagem de dano de Bobby
 }
-void jogadaDiana(){
+int jogadaDiana(){
 	printf("Diana usa o bastao magico\n");
+	return 7;//porcentagem de dano de Diana
 }
-void jogadaSheila(){
+int jogadaSheila(){
 	printf("Sheila usa a capa e ataca como um sniper\n");
+	return 9; //procentagem de dano de Sheila
 }
 
 void executaJogadaMeninos(int jogador){
 	atualizaDados();
 	int defendeu = (dadoMeninos < dadoTiamat);
-	float pontos = pontosRetiradosDragao();
+	int porcentagemDeDano = 0;
 	switch(jogador){
 		case _HANK:
-			jogadaHank();
+			porcentagemDeDano = jogadaHank();
 		break;
 		case _PRESTO:
-			jogadaPresto();
+			porcentagemDeDano = jogadaPresto();
 		break;
 		case _BOBBY:
-			jogadaBobby();
+			porcentagemDeDano = jogadaBobby();
 		break;
 		case _DIANA:
-			jogadaDiana();
+			porcentagemDeDano = jogadaDiana();
 		break;
 		case _SHEILA:
-			jogadaSheila();
+			porcentagemDeDano = jogadaSheila();
 		break;
 	}
 
 	if(defendeu){
 		printf("Mas Tiamat conseguiu defender.\n");
 	}else{
+		float pontos = pontosRetiradosDragao(porcentagemDeDano);
 		Vidas[_TIAMAT] -= pontos;
 		printf("%s perdeu %.2f pontos de vida\n", Nomes[_TIAMAT], pontos);
 		if(Vidas[_TIAMAT]<=0){
@@ -100,23 +104,29 @@ void executaJogadaMeninos(int jogador){
 			printf("%s foi derrotado\n", Nomes[_TIAMAT]);
 		}
 	}
+	imprimeDadoJogadores();
 }
 
 
-void ataqueCabecaBranca(int jogador){
-	printf("%s lanca raios congelantes contra %s\n",Nomes[_TIAMAT], Nomes[jogador] );
+int ataqueCabecaBranca(int jogador){
+	printf("%s lanca raios congelantes contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);\
+	return 15;
 }
-void ataqueCabecaVerde(int jogador){
-	printf("%s lanca gas venenoso contra %s\n",Nomes[_TIAMAT], Nomes[jogador] );
+int ataqueCabecaVerde(int jogador){
+	printf("%s lanca gas venenoso contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
+	return 10;
 }
-void ataqueCabecaVermelha(int jogador){
-	printf("%s lanca chamas contra %s\n",Nomes[_TIAMAT], Nomes[jogador] );
+int ataqueCabecaVermelha(int jogador){
+	printf("%s lanca chamas contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
+	return 20;
 }
-void ataqueCabecaAzul(int jogador){
-	printf("%s lanca raios contra %s\n",Nomes[_TIAMAT], Nomes[jogador] );
+int ataqueCabecaAzul(int jogador){
+	printf("%s lanca raios contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
+	return 9;
 }
-void ataqueCabecaPreta(int jogador){
-	printf("%s lanca acido contra %s\n",Nomes[_TIAMAT], Nomes[jogador] );
+int ataqueCabecaPreta(int jogador){
+	printf("%s lanca acido contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
+	return 7;
 }
 
 
@@ -133,9 +143,7 @@ int selecionaJogadorAuvo(){
 	return jogador;
 }
 
-float pontosRetiradosMeninos(int jogador){
-	int porcentagem = dadoMeninos - dadoTiamat;
-	if(porcentagem < 0)porcentagem *=-1;
+float pontosRetiradosMeninos(int jogador, int porcentagem){
 	return Vidas[jogador] * (porcentagem/100.0);
 }
 
@@ -144,36 +152,39 @@ void executaJogadaTiamat(){
 	int defendeu = (dadoTiamat < dadoMeninos && Vidas[_ERICK] > 0);
 	int cabeca = rand()%5;
 	int jogadorAtingido = selecionaJogadorAuvo();
-	float pontosRetirados = pontosRetiradosMeninos(jogadorAtingido);
-	if(numeroMeninosVivos < 0){
+	int porcentagemDano = 0;
+	if(numeroMeninosVivos < 0 || jogadorAtingido == -1){
 		printf("Nao existe ninguem vivo mais!!!\n");
 		exit(-1);
 	}
 	switch(cabeca){
 		case 0:
-			ataqueCabecaBranca(jogadorAtingido);
+			porcentagemDano = ataqueCabecaBranca(jogadorAtingido);
 			break;
 		case 1:
-			ataqueCabecaVerde(jogadorAtingido);
+			porcentagemDano = ataqueCabecaVerde(jogadorAtingido);
 			break;
 		case 2:
-			ataqueCabecaVermelha(jogadorAtingido);
+			porcentagemDano = ataqueCabecaVermelha(jogadorAtingido);
 			break;
 		case 3:
-			ataqueCabecaAzul(jogadorAtingido);
+			porcentagemDano = ataqueCabecaAzul(jogadorAtingido);
 			break;
 		case 4:
-			ataqueCabecaPreta(jogadorAtingido);
+			porcentagemDano = ataqueCabecaPreta(jogadorAtingido);
 			break;
 	}
 	if(defendeu)
 		printf("Mas Herik conseguiu defender o ataque.\n");
 	else{
+		float pontosRetirados = pontosRetiradosMeninos(jogadorAtingido, porcentagemDano);
 		Vidas[jogadorAtingido] -= pontosRetirados;
 		printf("%s perdeu %.2f pontos de vida\n",Nomes[jogadorAtingido], pontosRetirados);
 		if(Vidas[jogadorAtingido] <= 0){
-			Vidas[jogadorAtingido] = 0; numeroMeninosVivos--;
+			Vidas[jogadorAtingido] = 0;
+			numeroMeninosVivos--;
 			printf("%s foi derrotado\n",Nomes[jogadorAtingido]);
 		}
 	}
+	imprimeDadoJogadores();
 }
