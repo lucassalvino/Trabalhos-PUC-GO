@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define VIDAPADRAO 20000
-#define VIDATIAMAT 150000
 #define _HANK 0
 #define _PRESTO 1
 #define _BOBBY 2
@@ -32,7 +30,7 @@ int D10(){
 
 void imprimeDadoJogadores(){
 	for(int i = 0; i < 7; i++)
-		printf("\tPersonagem: %s\t Vida: %.2f\n", Nomes[i], Vidas[i]);
+		printf("\tPersonagem: %s\t Vida: %.3f\n", Nomes[i], Vidas[i]);
 	printf("\tDado Joagadores: [%d]\t\tDado Tiamat [%d]\n", dadoMeninos, dadoTiamat);
 	printf("\n\n\n\n\n");
 }
@@ -98,8 +96,8 @@ void executaJogadaMeninos(int jogador){
 	}else{
 		float pontos = pontosRetiradosDragao(porcentagemDeDano);
 		Vidas[_TIAMAT] -= pontos;
-		printf("%s perdeu %.2f pontos de vida\n", Nomes[_TIAMAT], pontos);
-		if(Vidas[_TIAMAT]<=0){
+		printf("%s perdeu %.3f pontos de vida\n", Nomes[_TIAMAT], pontos);
+		if(Vidas[_TIAMAT] <= 0.01){
 			Vidas[_TIAMAT] = 0;
 			printf("%s foi derrotado\n", Nomes[_TIAMAT]);
 		}
@@ -112,18 +110,22 @@ int ataqueCabecaBranca(int jogador){
 	printf("%s lanca raios congelantes contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);\
 	return 15;
 }
+
 int ataqueCabecaVerde(int jogador){
 	printf("%s lanca gas venenoso contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
 	return 10;
 }
+
 int ataqueCabecaVermelha(int jogador){
 	printf("%s lanca chamas contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
 	return 20;
 }
+
 int ataqueCabecaAzul(int jogador){
 	printf("%s lanca raios contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
 	return 9;
 }
+
 int ataqueCabecaPreta(int jogador){
 	printf("%s lanca acido contra %s\n",Nomes[_TIAMAT], Nomes[jogador]);
 	return 7;
@@ -132,7 +134,7 @@ int ataqueCabecaPreta(int jogador){
 
 int selecionaJogadorAuvo(){
 	if(numeroMeninosVivos <= 0)
-		return -1;
+		exit(-1);
 
 	int jogador = rand()%6;
 	if(Vidas[jogador] <= 0){
@@ -148,6 +150,9 @@ float pontosRetiradosMeninos(int jogador, int porcentagem){
 }
 
 void executaJogadaTiamat(){
+	if(Vidas[_TIAMAT] <= 0.01)
+		exit(-1);
+
 	atualizaDados();
 	int defendeu = (dadoTiamat < dadoMeninos && Vidas[_ERICK] > 0);
 	int cabeca = rand()%5;
@@ -179,8 +184,8 @@ void executaJogadaTiamat(){
 	else{
 		float pontosRetirados = pontosRetiradosMeninos(jogadorAtingido, porcentagemDano);
 		Vidas[jogadorAtingido] -= pontosRetirados;
-		printf("%s perdeu %.2f pontos de vida\n",Nomes[jogadorAtingido], pontosRetirados);
-		if(Vidas[jogadorAtingido] <= 0){
+		printf("%s perdeu %.3f pontos de vida\n",Nomes[jogadorAtingido], pontosRetirados);
+		if(Vidas[jogadorAtingido] <= 0.01){
 			Vidas[jogadorAtingido] = 0;
 			numeroMeninosVivos--;
 			printf("%s foi derrotado\n",Nomes[jogadorAtingido]);
