@@ -6,18 +6,24 @@
 #include <omp.h>
 using namespace std;
 
-bool Executa = false;
+bool Executa = true;
 
 void Tarefa01 (){
     printf("Tarefa 01\n");
-    double startTime = omp_get_wtime();
-    while ((omp_get_wtime() - startTime) <=1) {}
+    while(Executa){
+        double startTime = omp_get_wtime();
+        while ((omp_get_wtime() - startTime) <=1) {}
+        Executa = false;
+    }
 }
 
 void Tarefa02(){
     printf("Tarefa 02\n");
-    double startTime = omp_get_wtime();
-    while ((omp_get_wtime() - startTime) <=2) {}
+    while(!Executa){
+        double startTime = omp_get_wtime();
+        while ((omp_get_wtime() - startTime) <=2) {}
+        Executa = true;
+    }
 }
 
 void GerenteTarefas(){

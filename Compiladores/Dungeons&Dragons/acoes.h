@@ -70,6 +70,10 @@ int jogadaSheila(){
 }
 
 void executaJogadaMeninos(int jogador){
+	if(numeroMeninosVivos <= 0){
+		printf("Não existe nenhum ninguem mais vivo\n");
+		exit(-1);
+	}
 	atualizaDados();
 	int defendeu = (dadoMeninos < dadoTiamat);
 	int porcentagemDeDano = 0;
@@ -134,7 +138,7 @@ int ataqueCabecaPreta(int jogador){
 
 int selecionaJogadorAuvo(){
 	if(numeroMeninosVivos <= 0)
-		exit(-1);
+		return -1;
 
 	int jogador = rand()%6;
 	if(Vidas[jogador] <= 0){
@@ -150,15 +154,17 @@ float pontosRetiradosMeninos(int jogador, int porcentagem){
 }
 
 void executaJogadaTiamat(){
-	if(Vidas[_TIAMAT] <= 0.01)
+	if(Vidas[_TIAMAT] <= 0.01){
+		printf("Tiamat está morto\n");
 		exit(-1);
+	}
 
 	atualizaDados();
 	int defendeu = (dadoTiamat < dadoMeninos && Vidas[_ERICK] > 0);
 	int cabeca = rand()%5;
 	int jogadorAtingido = selecionaJogadorAuvo();
 	int porcentagemDano = 0;
-	if(numeroMeninosVivos < 0 || jogadorAtingido == -1){
+	if(numeroMeninosVivos <= 0 || jogadorAtingido == -1){
 		printf("Nao existe ninguem vivo mais!!!\n");
 		exit(-1);
 	}
