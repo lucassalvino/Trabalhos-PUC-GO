@@ -31,7 +31,7 @@ int D10(){
 void imprimeDadoJogadores(){
 	for(int i = 0; i < 7; i++)
 		printf("\tPersonagem: %s\t Vida: %.3f\n", Nomes[i], Vidas[i]);
-	printf("\tDado Joagadores: [%d]\t\tDado Tiamat [%d]\n", dadoMeninos, dadoTiamat);
+	printf("\tDado Jogadores: [%d]\t\tDado Tiamat [%d]\n", dadoMeninos, dadoTiamat);
 	printf("\n\n\n\n\n");
 }
 
@@ -61,7 +61,7 @@ int jogadaBobby(){
 	return 15;//porcentagem de dano de Bobby
 }
 int jogadaDiana(){
-	printf("Diana usa o bastao magico\n");
+	printf("Diana usa o bastao mágico\n");
 	return 7;//porcentagem de dano de Diana
 }
 int jogadaSheila(){
@@ -71,7 +71,7 @@ int jogadaSheila(){
 
 void executaJogadaMeninos(int jogador){
 	if(numeroMeninosVivos <= 0){
-		printf("Não existe nenhum ninguem mais vivo\n");
+		printf("Não existe mais ninguem vivo\n");
 		exit(-1);
 	}
 	atualizaDados();
@@ -136,7 +136,7 @@ int ataqueCabecaPreta(int jogador){
 }
 
 
-int selecionaJogadorAuvo(){
+int selecionaJogadorAlvo(){
 	if(numeroMeninosVivos <= 0)
 		return -1;
 
@@ -162,10 +162,10 @@ void executaJogadaTiamat(){
 	atualizaDados();
 	int defendeu = (dadoTiamat < dadoMeninos && Vidas[_ERICK] > 0);
 	int cabeca = rand()%5;
-	int jogadorAtingido = selecionaJogadorAuvo();
+	int jogadorAtingido = selecionaJogadorAlvo();
 	int porcentagemDano = 0;
 	if(numeroMeninosVivos <= 0 || jogadorAtingido == -1){
-		printf("Nao existe ninguem vivo mais!!!\n");
+		printf("Nao existe ninguem mais vivo!!!\n");
 		exit(-1);
 	}
 	switch(cabeca){
