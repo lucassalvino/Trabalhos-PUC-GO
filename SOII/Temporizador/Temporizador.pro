@@ -5,6 +5,5 @@ CONFIG -= qt
 
 LIBS += -lpthread
 LIBS += -lgomp
-
-
+LIBS +=  -pthread
 SOURCES += main.cpp
