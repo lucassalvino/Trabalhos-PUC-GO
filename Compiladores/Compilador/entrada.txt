@@ -1,2 +1,0 @@
-if|then|else|+|(E)|T*F|0|1|$|S`|S|E|A|I|T|F
-if|then|else|.|.|.|0|1|$|S`|S|E|A|I|T|F
