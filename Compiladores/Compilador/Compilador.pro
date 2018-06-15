@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-06-13T03:03:27
+# Project created by QtCreator 2018-06-15T00:17:27
 #
 #-------------------------------------------------
 
@@ -26,12 +26,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         janelaprincipal.cpp \
-    carregartabela.cpp
+    logica.cpp
 
 HEADERS += \
         janelaprincipal.h \
-    carregartabela.h
+    logica.h
 
 FORMS += \
-        janelaprincipal.ui \
-    carregartabela.ui
+        janelaprincipal.ui

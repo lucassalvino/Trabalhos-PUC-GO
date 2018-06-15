@@ -2,6 +2,7 @@
 #define JANELAPRINCIPAL_H
 
 #include <QMainWindow>
+#include "logica.h"
 
 namespace Ui {
 class JanelaPrincipal;
@@ -14,6 +15,10 @@ class JanelaPrincipal : public QMainWindow
 public:
     explicit JanelaPrincipal(QWidget *parent = 0);
     ~JanelaPrincipal();
+    Logica logica;
+
+private slots:
+    void on_actionCarregar_Tabela_triggered();
 
 private:
     Ui::JanelaPrincipal *ui;

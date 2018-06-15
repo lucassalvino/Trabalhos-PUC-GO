@@ -1,24 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>JanelaPrincipal</class>
- <widget class="QMainWindow" name="JanelaPrincipal" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="JanelaPrincipal">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>601</width>
+    <height>542</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>JanelaPrincipal</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>601</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOp_es">
+    <property name="title">
+     <string>Opções</string>
+    </property>
+    <addaction name="actionCarregar_Tabela"/>
+   </widget>
+   <addaction name="menuOp_es"/>
+  </widget>
+  <action name="actionCarregar_Tabela">
+   <property name="text">
+    <string>Carregar Tabela</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>
