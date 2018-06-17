@@ -25,8 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        janelaprincipal.cpp \
-    logica.cpp
+        janelaprincipal.cpp
 
 HEADERS += \
         janelaprincipal.h \

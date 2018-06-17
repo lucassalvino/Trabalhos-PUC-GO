@@ -6,20 +6,72 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
-    <height>542</height>
+    <width>775</width>
+    <height>660</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>JanelaPrincipal</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QTableView" name="TabelaCompi">
+        <property name="minimumSize">
+         <size>
+          <width>419</width>
+          <height>389</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="palavraTeste"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Submit">
+        <property name="text">
+         <string>Submit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="CancelarImput">
+        <property name="text">
+         <string>Cancelar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="ProximoPasso">
+      <property name="text">
+       <string>Próximo passo</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QTableView" name="tabeSaida"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
+     <width>775</width>
      <height>21</height>
     </rect>
    </property>
@@ -28,12 +80,19 @@
      <string>Opções</string>
     </property>
     <addaction name="actionCarregar_Tabela"/>
+    <addaction name="separator"/>
+    <addaction name="actionAjuda"/>
    </widget>
    <addaction name="menuOp_es"/>
   </widget>
   <action name="actionCarregar_Tabela">
    <property name="text">
     <string>Carregar Tabela</string>
+   </property>
+  </action>
+  <action name="actionAjuda">
+   <property name="text">
+    <string>Ajuda</string>
    </property>
   </action>
  </widget>

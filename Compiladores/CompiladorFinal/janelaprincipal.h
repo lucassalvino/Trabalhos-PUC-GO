@@ -20,6 +20,8 @@ public:
 private slots:
     void on_actionCarregar_Tabela_triggered();
 
+    void on_actionAjuda_triggered();
+
 private:
     Ui::JanelaPrincipal *ui;
 };
