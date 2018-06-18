@@ -9,18 +9,45 @@
 #include <stack>
 #include <string>
 #include <algorithm>
+#include <QDebug>
 
 using namespace std;
 class Logica
 {
 public:
-    Logica(){
-        pilha.push(0);
-        entrada.push("$");
-    }
 
     vector<string> getTitulos(){ return titulos;}
+
     vector<string> getLinhaTabela(int index){return tabela[index];}
+
+    void LimpaPilhas(){
+        while(!pilha.empty())pilha.pop();
+        while(!entrada.empty())entrada.pop();
+    }
+
+    string GetPilhasAsStrin(){
+        return GetStringOfStack(pilha);
+    }
+
+    string GetEntradaAsString(){
+        return GetStringOfStack(entrada);
+    }
+
+    string GetAcao(){
+        return acao;
+    }
+
+    void adicionaEntrada(string value){
+        if((int)entrada.size() <= 0 || (int)entrada.size() == 1){//vazio
+            while(!pilha.empty())pilha.pop();
+            while(!entrada.empty())entrada.pop();
+            pilha.push(0);
+            entrada.push("$");
+            acao = "ND";
+        }
+        entrada.push(value);
+    }
+
     int numeroLinhas(){return (int)tabela.size();}
     vector<string> GeraLinhaParametros(char* linhas_str){
         vector<string> retorno;
@@ -58,7 +85,7 @@ public:
         }
         fclose(arq);
     }
-    void calculaProximoPasso(){
+    bool calculaProximoPasso(){
         int colunaPilha = GetColunaTitulo(entrada.top());
 
         if(colunaPilha < 0){
@@ -67,19 +94,25 @@ public:
 
         string entradaLinha = tabela[pilha.top()][colunaPilha];
 
+        if(entradaLinha == "acc")
+            return true;
+
         if(entradaLinha == ""){
             throw string("falha não encontrado ação para o topo da pilha e a entrada especificada");
         }
 
+        qDebug()<<"Valor Tabela: "<<entradaLinha.c_str();
+
         if(entradaLinha[0] == 'S' || entradaLinha[0] == 's' ){
-            std::remove(entradaLinha.begin(), entradaLinha.end(), 's');
-            std::remove(entradaLinha.begin(), entradaLinha.end(), 'S');
+            entradaLinha = GetNum(entradaLinha);
             int num = std::stoi(entradaLinha);
             pilha.push(num);
+            acao = "Shift";
+            qDebug()<<"Shift"<<num;
+            entrada.pop();
         }else{
             if(entradaLinha[0] == 'R' || entradaLinha[0] == 'r' ){
-                std::remove(entradaLinha.begin(), entradaLinha.end(), 'R');
-                std::remove(entradaLinha.begin(), entradaLinha.end(), 'r');
+                entradaLinha = GetNum(entradaLinha);
                 int num = std::stoi(entradaLinha);
                 string producao = producoes[num];
                 int numeroReduce = GetNumeroRemocoesPilha(producao);
@@ -87,13 +120,19 @@ public:
                 for(;numeroReduce; numeroReduce--)
                     pilha.pop();
 
+                int num2 = GetNumeroProducaoTabela(producoes[num]);
                 num = pilha.top();
-                string reduz = std::stoi(producoes[num][0]);
-                int num2 = GetColunaTitulo(reduz);
-                string tabela = tabela[num][num2];
-                pilha.push(std::stoi(tabela));
+                qDebug()<<"Reduce "<<num<<num2;
+                string numeroPilha = (tabela[num])[num2];
+                if(numeroPilha == "acc")
+                    return true;
+                pilha.push(std::stoi(numeroPilha));
+                acao = "Reduce";
+            }else{
+                qDebug()<<"FIZ NADA";
             }
         }
+        return false;
     }
 private:
     string caminhoTabela;
@@ -105,7 +144,7 @@ private:
     int passo;
     stack<int> pilha;
     stack<string> entrada;
-    string acoa;
+    string acao;
 
 
     int GetColunaTitulo(string entrada){
@@ -120,7 +159,7 @@ private:
     int GetNumeroRemocoesPilha(string producao){
         producao = trim(producao);
         char antes[50], depois[100];
-        sscanf(producao.c_str(), "%[^>]> %s", antes, depois);
+        sscanf(producao.c_str(), "%[^>]> %[^\t\n]", antes, depois);
         int reto = 0;
         for(int i = 0; depois[i] != '\0'; i++)
             if(depois[i] == ' ')
@@ -128,6 +167,12 @@ private:
         return ++reto;
     }
 
+    int GetNumeroProducaoTabela(string producao){
+        char nomeProducao[10];
+        producao = trim(producao);
+        sscanf(producao.c_str(), "%[^ ]", nomeProducao);
+        return GetColunaTitulo(string(nomeProducao));
+    }
 
     std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
     {
@@ -144,6 +189,30 @@ private:
     std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
     {
         return ltrim(rtrim(str, chars), chars);
+    }
+
+    string GetStringOfStack(stack<string> value){
+        string retorno = "";
+        while (!value.empty()) {
+            retorno+=value.top() + " ";
+            value.pop();
+        }
+        return retorno;
+    }
+    string GetStringOfStack(stack<int> value){
+        string retorno = "";
+        while (!value.empty()) {
+            retorno += std::to_string(value.top()) + " ";
+            value.pop();
+        }
+        return retorno;
+    }
+    string GetNum(string orig){
+        string reto = "";
+        for(char ch : orig)
+            if(ch >= '0' && ch <= '9')
+                reto += ch;
+        return reto;
     }
 };
 
